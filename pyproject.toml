@@ -1,0 +1,17 @@
+[project]
+name = "omniauditor"
+version = "1.0.0"
+description = "Universal Pharmacopoeia Expiry Checker"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "flet",
+    "openpyxl",
+    "beautifulsoup4",
+    "PySocks"
+]
+
+[tool.flet.app]
+id = "com.beximco.omniauditor"
+name = "Omni Auditor"
+orientation = "portrait"
