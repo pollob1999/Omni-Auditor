@@ -1,17 +1,36 @@
-[project]
-name = "omniauditor"
-version = "1.0.0"
-description = "Universal Pharmacopoeia Expiry Checker"
-readme = "README.md"
-requires-python = ">=3.11"
-dependencies = [
-    "flet==0.22.1",
-    "openpyxl",
-    "beautifulsoup4",
-    "PySocks"
-]
+name: Build Android APK
+on:
+  push:
+    branches: [ "main" ]
+  workflow_dispatch:
 
-[tool.flet.app]
-id = "com.beximco.omniauditor"
-name = "Omni Auditor"
-orientation = "portrait"
+jobs:
+  build-apk:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Set up Java (Required for Android build)
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'zulu'
+          java-version: '17'
+
+      - name: Install Dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install flet openpyxl beautifulsoup4 PySocks
+
+      - name: Build Omni Auditor APK
+        run: flet build apk
+
+      - name: Upload APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: OmniAuditor-APK
+          path: build/apk/**/*.apk
