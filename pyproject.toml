@@ -5,7 +5,7 @@ description = "Universal Pharmacopoeia Expiry Checker"
 readme = "README.md"
 requires-python = ">=3.11"
 dependencies = [
-    "flet",
+    "flet==0.22.1",
     "openpyxl",
     "beautifulsoup4",
     "PySocks"
